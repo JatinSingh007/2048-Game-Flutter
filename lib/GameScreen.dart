@@ -194,25 +194,25 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  GestureDetector(
-                    onPanEnd: (DragEndDetails details) {
-                      final v = details.velocity.pixelsPerSecond;
-                      const minVelocity = 100;
-                      if (v.dx.abs() > v.dy.abs()) {
-                        if (v.dx > minVelocity) {
-                          _handleMove('right');
-                        } else if (v.dx < -minVelocity) {
-                          _handleMove('left');
+                  Expanded(
+                    child: GestureDetector(
+                      onPanEnd: (DragEndDetails details) {
+                        final v = details.velocity.pixelsPerSecond;
+                        const minVelocity = 100;
+                        if (v.dx.abs() > v.dy.abs()) {
+                          if (v.dx > minVelocity) {
+                            _handleMove('right');
+                          } else if (v.dx < -minVelocity) {
+                            _handleMove('left');
+                          }
+                        } else if (v.dy.abs() > minVelocity) {
+                          if (v.dy > minVelocity) {
+                            _handleMove('down');
+                          } else if (v.dy < -minVelocity) {
+                            _handleMove('up');
+                          }
                         }
-                      } else if (v.dy.abs() > minVelocity) {
-                        if (v.dy > minVelocity) {
-                          _handleMove('down');
-                        } else if (v.dy < -minVelocity) {
-                          _handleMove('up');
-                        }
-                      }
-                    },
-                    child: Expanded(
+                      },
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           final boardSize =
