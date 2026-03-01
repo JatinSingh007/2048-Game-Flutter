@@ -169,6 +169,37 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                         ),
                         child: IconButton(
                           onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (dialogContext) => AlertDialog(
+                                      title: const Text('How to Play'),
+                                      content: const Text(
+                                          '• Move: Swipe on the board (or use arrow keys) up, down, left, or right.\n\n'
+                                          '• Merge: When two tiles with the same number touch, they combine into one tile with their sum (e.g. 2+2→4).\n\n'
+                                          '• Goal: Create a 2048 tile to win. You can keep playing for higher numbers.\n\n'
+                                          '• After each move, a new 2 appears. When the grid is full and no merge is possible, the game ends.\n\n'
+                                          '• Use Undo to take back your last move; use ↻ to start a new game.'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () =>
+                                                Navigator.of(dialogContext)
+                                                    .pop(),
+                                            child: const Text('OK')),
+                                      ],
+                                    ));
+                          },
+                          icon: const Icon(Icons.lightbulb_outline_rounded),
+                          color: Colors.white,
+                          iconSize: 26,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
                             gameService.pop();
                           },
                           icon: const Icon(Icons.undo),
